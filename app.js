@@ -10,12 +10,16 @@ var apiRouter = require('./routes/API/api');
 
 var app = express();
 
+const ACCEPTED_CONTENT_TYPES = ["application/json", "application/ld+json"];
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
-app.use(express.json());
+
+
+app.use(express.json({ type: ACCEPTED_CONTENT_TYPES }));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
