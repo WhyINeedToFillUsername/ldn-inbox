@@ -6,3 +6,21 @@ body {
 a {
   color: #00B7FF;
 }
+
+header {
+  margin-bottom: 40px;
+}
+
+nav {
+  float: left;
+}
+
+#messages .date {
+  display: inline-block;
+  float: right;
+}
+
+#messages .actor {
+  display: inline-block;
+  width: 20%;
+}

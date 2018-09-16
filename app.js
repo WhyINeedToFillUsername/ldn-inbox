@@ -10,7 +10,11 @@ var apiRouter = require('./routes/API/api');
 
 var app = express();
 
-const ACCEPTED_CONTENT_TYPES = ["application/json", "application/ld+json"];
+const ACCEPTED_CONTENT_TYPES = [
+    "application/json",
+    "application/ld+json",
+    "application/activity+json"
+];
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
