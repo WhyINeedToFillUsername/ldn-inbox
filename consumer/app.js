@@ -4,7 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var apiRouter = require('./routes/api');
+var indexRouter = require('./routes/index');
+var apiRouter = require('./routes/API/api');
 
 var app = express();
 
@@ -14,6 +15,10 @@ const ACCEPTED_CONTENT_TYPES = [
     "application/activity+json"
 ];
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+
 app.use(logger('dev'));
 
 
@@ -22,6 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', indexRouter);
 app.use('/API', apiRouter);
 
 // catch 404 and forward to error handler
