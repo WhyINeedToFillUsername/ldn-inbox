@@ -1,10 +1,24 @@
-exports.fakeDB = {
+let id = 0;
 
-    messages: [
-        {id: 1, content: "Harry Potter"},
-        {id: 2, content: "J. K. Rowling"},
-        {id: 3, content: "Petr Olšák"},
-        {id: 4, content: "Borec Vráťa"},
-        {id: 5, content: "Antonín Karola"}
-    ]
+let notifications = [
+    {id: id++, content: {from: "Harry Potter"}},
+    {id: id++, content: {from: "J. K. Rowling"}},
+    {id: id++, content: {from: "Petr Olšák"}},
+    {id: id++, content: {from: "Borec Vráťa"}},
+    {id: id++, content: {from: "Antonín Karola"}}
+];
+
+let fakeDB = {
+
+    addNewNotification: function (notification) {
+        let newId = id++;
+        notifications.push({id: newId, content: notification, dateReceived: Date.now()})
+        return newId;
+    },
+
+    getAllNotifications: function () {
+        return notifications;
+    }
 };
+
+module.exports = fakeDB;

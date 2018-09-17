@@ -1,5 +1,9 @@
 exports.fakeDB = {
 
+    notifications: [
+        {id: 1, content: "", from: "", dateReceived: ""}
+    ],
+
     messages: [
         {id: 1, content: "Harry Potter"},
         {id: 2, content: "J. K. Rowling"},
