@@ -14,13 +14,17 @@ router.post(NOTIFICATION_URL, function (req, res, next) {
 });
 
 router.get(NOTIFICATION_URL, function (req, res, next) {
-    //TODO send all notifications
-    res.type(CONTENT_TYPE).send(createAllNotificationsResponse());
+    res.type(CONTENT_TYPE).send(createAllNotificationsResponse(req));
 });
 
 router.get(NOTIFICATION_URL + '/:notificationId', function (req, res, next) {
-    //TODO get with id - return its json
-    res.send("requested notification with id " + req.params.notificationId);
+    let id = parseInt(req.params.notificationId);
+    let notification = db.getNotificationById(id);
+    if (notification == null) {
+        res.sendStatus(400);
+    } else {
+        res.type(CONTENT_TYPE).send(notification.content);
+    }
 });
 
 module.exports = router;
@@ -30,24 +34,24 @@ function processMessage(notification) {
     return db.addNewNotification(notification);
 }
 
-function getNotificationsUrls() {
+function getNotificationsUrls(fullUrl) {
     let notifs = db.getAllNotifications();
-    let location = ENDPOINT_URL + NOTIFICATION_URL + '/';
-    // let location = express.address() + ENDPOINT_URL + NOTIFICATION_URL + '/';
+    let location = fullUrl + ENDPOINT_URL + NOTIFICATION_URL + '/';
     let urls = notifs.map(n => location + n.id);
     return urls;
 }
 
-function createAllNotificationsResponse() {
-    let urls = getNotificationsUrls();
+function createAllNotificationsResponse(req) {
+    let appBaseUrl = getAppBaseUrl(req);
+    let linksToNotifications = getNotificationsUrls(appBaseUrl);
     let response = {
         "@context": "http://www.w3.org/ns/ldp",
         "@id": "http://example.org/inbox/",
-        "contains": urls
-    }
+        "contains": linksToNotifications
+    };
     return response;
 }
 
-function getFullUrl(req) {
-    return req.protocol + '://' + req.get('host') + req.originalUrl;
+function getAppBaseUrl(req) {
+    return req.protocol + '://' + req.get('host');
 }
