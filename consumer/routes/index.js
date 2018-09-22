@@ -6,7 +6,7 @@ const receiverService = require('../services/receiverService');
 router.get('/', function (req, res, next) {
 
     receiverService.getNotifications(function (error, notifications) {
-        res.render('index', {
+        res.render('content/index', {
             title: 'Inbox',
             error: error,
             notifications: notifications
