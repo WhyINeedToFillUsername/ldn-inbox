@@ -15,12 +15,12 @@ nav {
   float: left;
 }
 
-#messages .date {
+#notifications .date {
   display: inline-block;
   float: right;
 }
 
-#messages .actor {
+#notifications .actor {
   display: inline-block;
   width: 20%;
 }

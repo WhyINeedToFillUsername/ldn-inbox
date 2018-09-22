@@ -1,13 +1,16 @@
-var express = require('express');
-var router = express.Router();
-var db = require('../fakeDB').fakeDB;
+const express = require('express');
+const router = express.Router();
+const receiverService = require('../services/receiverService');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    // TODO GET the messages from receiver https://stackoverflow.com/questions/40497534/how-to-res-send-to-a-new-url-in-node-js-express
-    res.render('index', {
-        title: 'Inbox',
-        messages: db.messages
+
+    receiverService.getNotifications(function (error, notifications) {
+        res.render('index', {
+            title: 'Inbox',
+            error: error,
+            notifications: notifications
+        });
     });
 });
 
