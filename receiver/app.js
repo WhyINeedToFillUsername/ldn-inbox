@@ -9,8 +9,9 @@ var apiRouter = require('./routes/api');
 
 var app = express();
 
-app.use(logger('dev'));
+app.disable('x-powered-by');
 
+app.use(logger('dev'));
 app.use(express.json({ type: config.ACCEPTED_CONTENT_TYPES }));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
