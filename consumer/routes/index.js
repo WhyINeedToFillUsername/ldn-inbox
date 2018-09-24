@@ -14,4 +14,16 @@ router.get('/', function (req, res, next) {
     });
 });
 
+router.get('/notification/:notificationId', function (req, res, next) {
+    const id = encodeURIComponent(req.params.notificationId);
+
+    receiverService.getNotificationById(id, function (error, notification) {
+        res.render('content/notification', {
+            title: 'Inbox - notification ' + id,
+            error: error,
+            notification: notification
+        });
+    });
+});
+
 module.exports = router;

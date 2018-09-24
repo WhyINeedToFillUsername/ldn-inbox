@@ -1,40 +1,44 @@
-<header class="col">
-    <h1>{{title}}</h1>
-    <p>Welcome to Inbox</p>
+<header class="row">
+    <div class="col">
+        <h1>{{title}}</h1>
+        <p>Welcome to Inbox</p>
+    </div>
 </header>
 
-<!-- TODO create a module of the menu -->
-<nav class="col-2">
-    <ul class="nav flex-column nav-pills">
-        <li class="nav-item"><a class="nav-link active" href="#">Inbox</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Outbox</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Archived</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Bin</a></li>
-    </ul>
-</nav>
+<div class="row">
+    <!-- TODO create a module of the menu -->
+    <nav class="col-2">
+        <ul class="nav flex-column nav-pills">
+            <li class="nav-item"><a class="nav-link active" href="#">Inbox</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Outbox</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Archived</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Bin</a></li>
+        </ul>
+    </nav>
 
-<main class="col">
-    <div id="notifications" class="list-group">
-        {{#if error}}
-            <!-- TODO create a module of the error -->
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                {{error}}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {{/if}}
+    <main class="col">
+        <div id="notifications" class="list-group">
+            {{#if error}}
+                <!-- TODO create a module of the error -->
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{error}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {{/if}}
 
-        {{#if notifications}}
-            {{#each notifications }}
-                <a href="{{this}}" class="list-group-item list-group-item-action">
-                    <!--<span class="actor">{{this}}</span>-->
-                    {{this}}
-                    <!--<span class="date">10:23</span>-->
-                </a>
-            {{/each}}
-        {{else}}
-            <span class="list-group-item">No notifications available.</span>
-        {{/if}}
-    </div>
-</main>
+            {{#if notifications}}
+                {{#each notifications }}
+                    <a href="{{this}}" class="list-group-item list-group-item-action">
+                        <!--<span class="actor">{{this}}</span>-->
+                        {{this}}
+                        <!--<span class="date">10:23</span>-->
+                    </a>
+                {{/each}}
+            {{else}}
+                <span class="list-group-item">No notifications available.</span>
+            {{/if}}
+        </div>
+    </main>
+</div>

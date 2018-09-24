@@ -15,7 +15,7 @@ nav {
   float: left;
 }
 
-#notifications .date {
+main .date {
   display: inline-block;
   float: right;
 }
@@ -23,4 +23,8 @@ nav {
 #notifications .actor {
   display: inline-block;
   width: 20%;
+}
+
+.actions a {
+  margin-right: 1em;
 }

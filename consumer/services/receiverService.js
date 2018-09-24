@@ -4,7 +4,8 @@ const request = require('request');
 const API_KEY = require('../../API_KEY');
 
 const headers = {
-    'Authorization': API_KEY
+    'Authorization': API_KEY,
+    'Accept': "application/json"
 };
 
 const receiverService = {
