@@ -2,23 +2,23 @@
 
 This project is an [Linked Data Notification](https://www.w3.org/TR/ldn/) implementation:
 
-![Overview of Linked Data Notifications](ldn-overview.png?s=100)
+<img src="ldn-overview.png" alt="Overview of Linked Data Notifications" width=400 />
 
 It is split to _consumer_ (+ sender) and _receiver_ modules.
 Both are [node.js](https://nodejs.org/) ([express](https://expressjs.com/)) apps.
 
-##Requirements
+## Requirements
 You need to install [node.js](https://nodejs.org/) (with included [npm](https://www.npmjs.com/get-npm)).
 <!--Also, you will need [Python](https://www.python.org/downloads/) of version **2.7.xx**.--> 
 
-##Install
+## Install
 Run the following command in the **module's root folder**:
 ```bat
 npm install
 ```
 It installs all project dependencies, for details see https://docs.npmjs.com/cli/install.
 
-##Run
+## Run
 _consumer_ listens on local port 8000, _receiver_ on 3000. You can change that in their bin/www files.
 Run each module separately using following command in the **module's root folder**:
 ```bat
@@ -26,7 +26,7 @@ npm start
 ```
 The _consumer_ requires the _receiver_ to be running.
 
-##Usage
+## Usage
 You can try the _consumer_ in your browser at http://localhost:8000/.
 When you post
 ```json
