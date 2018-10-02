@@ -9,7 +9,8 @@ Both are [node.js](https://nodejs.org/) ([express](https://expressjs.com/)) apps
 
 ## Requirements
 You need to install [node.js](https://nodejs.org/) (with included [npm](https://www.npmjs.com/get-npm)).
-<!--Also, you will need [Python](https://www.python.org/downloads/) of version **2.7.xx**.--> 
+<!--Also, you will need [Python](https://www.python.org/downloads/) of version **2.7.xx**.
+because of https://github.com/digitalbazaar/rdf-canonize/issues/5--> 
 
 ## Install
 Run the following command in the **module's root folder**:
