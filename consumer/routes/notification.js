@@ -3,7 +3,7 @@ const router = express.Router();
 const receiverService = require('../services/receiverService');
 
 
-router.get('/', function (req, res, next) {
+router.get('/notifications', function (req, res, next) {
     receiverService.getNotifications(function (error, notifications) {
         res.render('content/notifications', {
             title: 'Inbox - notifications',

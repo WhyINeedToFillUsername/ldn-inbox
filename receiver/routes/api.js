@@ -29,4 +29,14 @@ router.get(config.NOTIFICATION_URL + '/:notificationId', function (req, res, nex
     }
 });
 
+router.options(config.NOTIFICATION_URL, function (req, res, next) {
+    res
+        .set({
+            'Allow': 'GET, OPTIONS, POST',
+            'Accept-Post': 'application/ld+json'
+        })
+        .status(200)
+        .end();
+});
+
 module.exports = router;
