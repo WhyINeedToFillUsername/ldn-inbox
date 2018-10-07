@@ -6,7 +6,7 @@ const config = {
         "application/activity+json"
     ],
 
-    INBOX_URL: 'http://localhost:3000/API/notifications/',
+    INBOX_URL: 'http://localhost:5001/API/notifications/',
 };
 
 module.exports = config;
