@@ -12,7 +12,8 @@ const notificationService = {
         let linksToNotifications = getNotificationsUrls(appBaseUrl);
         let response = {
             "@context": "http://www.w3.org/ns/ldp",
-            "@id": "http://example.org/inbox/",
+            "@id": appBaseUrl + config.ENDPOINT_URL + config.NOTIFICATION_URL,
+            "@type": "ldp:Container",
             "contains": linksToNotifications
         };
         return response;
@@ -30,8 +31,11 @@ function getAppBaseUrl(req) {
 function getNotificationsUrls(fullUrl) {
     let notifs = db.getAllNotifications();
     let location = fullUrl + config.ENDPOINT_URL + config.NOTIFICATION_URL + '/';
-    let urls = notifs.map(n => location + n.id);
-    return urls;
+    let notificationsUrls = [];
+    for (let notif of notifs) {
+        notificationsUrls.push({"@id": location + notif.id});
+    }
+    return notificationsUrls;
 }
 
 module.exports = notificationService;
