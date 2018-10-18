@@ -11,10 +11,10 @@ const notificationService = {
         let appBaseUrl = getAppBaseUrl(req);
         let linksToNotifications = getNotificationsUrls(appBaseUrl);
         let response = {
-            "@context": "http://www.w3.org/ns/ldp",
+            "@context": "http://www.w3.org/ns/ldp#",
             "@id": appBaseUrl + config.ENDPOINT_URL + config.NOTIFICATION_URL,
             "@type": "ldp:Container",
-            "contains": linksToNotifications
+            "ldp:contains": linksToNotifications
         };
         return response;
     },
