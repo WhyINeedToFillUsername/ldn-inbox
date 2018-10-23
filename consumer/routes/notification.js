@@ -4,13 +4,24 @@ const receiverService = require('../services/receiverService');
 
 
 router.get('/notifications', function (req, res, next) {
-    receiverService.getNotifications(function (error, notifications) {
-        res.render('content/notifications', {
-            title: 'Inbox - notifications',
-            error: error,
-            notifications: notifications
+    let inboxUrl = req.session.currentInboxUrl;
+
+    if (inboxUrl) {
+        receiverService.getNotifications(inboxUrl, function (error, notifications) {
+            res.render('content/notifications', {
+                title: 'Inbox - notifications',
+                error: error,
+                notifications: notifications
+            });
         });
-    });
+
+    } else {
+        let errors = [{msg: "Inbox URL is not set. You must discover it from a target."}];
+        if (req.session.errors) errors = errors.concat(req.session.errors);
+
+        req.session.errors = errors;
+        res.redirect("/");
+    }
 });
 
 

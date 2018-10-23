@@ -3,30 +3,22 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const config = require('./config');
-const session = require('express-session');
 
 var indexRouter = require('./routes/index');
-var notificationRouter = require('./routes/notification');
 
 var app = express();
-
-app.disable('x-powered-by');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
-
-app.use(express.json({ type: config.ACCEPTED_CONTENT_TYPES }));
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret: 'TODOchange', saveUninitialized: false, resave: false})); //TODO change secret
 
 app.use('/', indexRouter);
-app.use('/', notificationRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -75,7 +75,7 @@ typings/
 .serverless
 
 .idea/
-/inbox.iml
+*.iml
 
 # do not share the secret key!
 /API_KEY.js

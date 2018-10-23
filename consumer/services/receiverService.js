@@ -10,9 +10,9 @@ const headers = {
 
 const receiverService = {
 
-    getNotifications: function (callback) {
+    getNotifications: function (inboxUrl, callback) {
         const ERROR_MESSAGE = "Error retrieving notifications from inbox.";
-        const options = {url: config.INBOX_URL, headers: headers};
+        const options = {url: inboxUrl, headers: headers};
 
         request.get(options, function (error, response, body) {
             let notifications = null;
@@ -20,7 +20,7 @@ const receiverService = {
 
             if (!error && response.statusCode == 200) {
                 try {
-                    notifications = JSON.parse(body).contains;
+                    notifications = JSON.parse(body)['ldp:contains'];
                 } catch (e) {
                     errorMessage = ERROR_MESSAGE;
                 }
