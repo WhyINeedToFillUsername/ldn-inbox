@@ -1,6 +1,8 @@
 const config = require('../config');
 const db = require('../fakeDB');
 
+const ENDPOINT_FULL_URL = config.BASE_URL + config.ENDPOINT_URL + config.NOTIFICATION_URL + '/';
+
 const notificationService = {
 
     processMessage: function (notification) {
@@ -8,15 +10,12 @@ const notificationService = {
     },
 
     createAllNotificationsResponse: function (req) {
-        let appBaseUrl = getAppBaseUrl(req);
-        let linksToNotifications = getNotificationsUrls(appBaseUrl);
-        let response = {
+        return {
             "@context": "http://www.w3.org/ns/ldp#",
-            "@id": appBaseUrl + config.ENDPOINT_URL + config.NOTIFICATION_URL,
+            "@id": ENDPOINT_FULL_URL,
             "@type": "ldp:Container",
-            "ldp:contains": linksToNotifications
+            "ldp:contains": getNotificationsUrls()
         };
-        return response;
     },
 
     getNotificationById: function (id) {
@@ -24,16 +23,11 @@ const notificationService = {
     }
 };
 
-function getAppBaseUrl(req) {
-    return req.protocol + '://' + req.get('host');
-}
-
-function getNotificationsUrls(fullUrl) {
+function getNotificationsUrls() {
     let notifs = db.getAllNotifications();
-    let location = fullUrl + config.ENDPOINT_URL + config.NOTIFICATION_URL + '/';
     let notificationsUrls = [];
     for (let notif of notifs) {
-        notificationsUrls.push({"@id": location + notif.id});
+        notificationsUrls.push({"@id": ENDPOINT_FULL_URL + notif.id});
     }
     return notificationsUrls;
 }

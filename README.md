@@ -4,8 +4,8 @@ This project is an [Linked Data Notification](https://www.w3.org/TR/ldn/) implem
 
 <img src="ldn-overview.png" alt="Overview of Linked Data Notifications" width=400 />
 
-It is split to _consumer_ (+ sender) and _receiver_ modules.
-Both are [node.js](https://nodejs.org/) ([express](https://expressjs.com/)) apps.
+It is split to _consumer_ (+ sender), _receiver_ and a sample _target_ modules.
+All are [node.js](https://nodejs.org/) ([express](https://expressjs.com/)) apps.
 
 ## Requirements
 You need to install [node.js](https://nodejs.org/) (with included [npm](https://www.npmjs.com/get-npm)).
@@ -37,6 +37,6 @@ When you post
  "attributedTo": "https://social.example/alyssa/",
  "content": "Say, did you finish reading that book I lent you?"}
 ```
-with `Content-Type: application/ld+json` to http://localhost:3000/API/notifications, the _receiver_ will return 201 with
-location. You can then GET it at http://localhost:3000/API/notifications/xx. Or let the _consumer_ display it in the browser
+with `Content-Type: application/ld+json` to http://localhost:5001/API/notifications, the _receiver_ will return 201 with
+location. You can then GET it at http://localhost:5001/API/notifications/xx. Or let the _consumer_ display it in the browser
 at http://localhost:8000/notification/xx.
