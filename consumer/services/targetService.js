@@ -1,5 +1,6 @@
 const request = require('request');
 const LinkHeader = require('http-link-header');
+const $rdf = require('rdflib');
 
 const INBOX_REL_URL = 'http://www.w3.org/ns/ldp#inbox';
 
@@ -20,7 +21,7 @@ const targetService = {
         */
 
 
-        // Option 1) a)
+        // 1) a) HEAD to retrieve the ldp#inbox link header
         const options = {url: urlToExplore, headers: {'Accept': "application/json"}};
 
         request.head(options, function (error, response, body) {
@@ -39,12 +40,45 @@ const targetService = {
                 console.warn('Error discovering inbox - error requesting the submitted url.');
             }
 
-            callback(inboxUrl);
+            if (inboxUrl) {
+                callback(inboxUrl);
+
+            } else { // 2) e) GET on the target URL to retrieve an RDF representation
+                getInboxUrlFromRDF(urlToExplore, callback);
+            }
         });
-
-
-        // make an HTTP GET request on the target URL to retrieve an RDF representation
     }
 };
+
+function getInboxUrlFromRDF(urlToExplore, callback) {
+    const mimeType = 'text/turtle';
+    const options = {url: urlToExplore, headers: {'Accept': mimeType}};
+
+    request.get(options, function (error, response, body) {
+        let inboxUrl = null;
+
+        if (!error && response.statusCode == 200) {
+            try {// if we got 200 response, try to retrieve the inbox URL from the RDF representation
+
+                const W3 = $rdf.Namespace('http://www.w3.org/ns/');
+                const store = $rdf.graph();
+
+                // parse response body with RDF parser to the RDF store
+                $rdf.parse(body, store, urlToExplore, mimeType);
+
+                // look for ldp#inbox in the RDF triples
+                let inboxNode = store.any($rdf.sym(urlToExplore), W3('ldp#inbox'));
+
+                inboxUrl = inboxNode.uri;
+            } catch (e) {
+                console.warn('Error discovering inbox: error reading response.');
+            }
+        } else {
+            console.warn('Error discovering inbox - error requesting the submitted url.');
+        }
+
+        callback(inboxUrl);
+    });
+}
 
 module.exports = targetService;
