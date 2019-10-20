@@ -35,7 +35,7 @@ const receiverService = {
 
     getNotificationById: function (id, callback) {
         const ERROR_MESSAGE = "Error retrieving notification from inbox.";
-        const options = {url: config.INBOX_URL + id, headers: headers};
+        const options = {url: id, headers: headers}; // TODO we're using id directly from the url. Is this safe?
 
         request.get(options, function (error, response, body) {
             let notification = null;
@@ -43,7 +43,7 @@ const receiverService = {
 
             if (!error && response.statusCode == 200) {
                 try {
-                    notification = JSON.parse(body);
+                    notification = JSON.stringify(JSON.parse(body), null, 4); // "reparse" for nice format
                 } catch (e) {
                     errorMessage = ERROR_MESSAGE;
                 }

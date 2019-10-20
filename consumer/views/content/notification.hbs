@@ -12,18 +12,12 @@
 
         <div class="card">
             <div class="card-header actions">
-                <a href="/" title="Back to inbox"><i class="fas fa-arrow-left"></i></a>
-                {{#if notification}}
-                    <a href="" title="Delete"><i class="fas fa-trash-alt"></i></a>
-                    <span class="float-right">From: <a href="" title="From">{{notification.attributedTo}}</a> 10:23</span>
-                {{/if}}
+                <a href="/notifications" title="Back to inbox"><i class="fas fa-arrow-left"></i></a>
             </div>
             <div class="card-body">
                 {{#if notification}}
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">
-                        {{notification.content}}
-                    </p>
+                    <h5 class="card-title">Notification id: '{{id}}'</h5>
+                    <pre>{{notification}}</pre>
                 {{else}}
                     <p class="card-text">No content available</p>
                 {{/if}}

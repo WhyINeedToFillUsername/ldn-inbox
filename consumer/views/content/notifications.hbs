@@ -13,7 +13,7 @@
 
             {{#if notifications}}
                 {{#each notifications }}
-                    <a href="/notification/{{this.[@id]}}" class="list-group-item list-group-item-action">
+                    <a href="/notification/{{encode this.[@id]}}" class="list-group-item list-group-item-action">
                         <!--<span class="actor">{{this}}</span>-->
                         {{this.[@id]}}
                         <!--<span class="date">10:23</span>-->

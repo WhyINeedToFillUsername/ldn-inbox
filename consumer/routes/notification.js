@@ -1,7 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const hbs = require('hbs');
 const receiverService = require('../services/receiverService');
 
+hbs.registerHelper('encode', function (uri) {
+    return encodeURIComponent(uri);
+});
 
 router.get('/notifications', function (req, res, next) {
     let inboxUrl = req.session.currentInboxUrl;
@@ -26,11 +30,12 @@ router.get('/notifications', function (req, res, next) {
 
 
 router.get('/notification/:notificationId', function (req, res, next) {
-    const id = encodeURIComponent(req.params.notificationId);
+    const notificationId = req.params.notificationId;
 
-    receiverService.getNotificationById(id, function (error, notification) {
+    receiverService.getNotificationById(notificationId, function (error, notification) {
         res.render('content/notification', {
-            title: 'Inbox - detail of notification ' + id,
+            title: 'Inbox - detail of notification',
+            id: encodeURI(notificationId),
             error: error,
             notification: notification
         });

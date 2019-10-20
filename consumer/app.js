@@ -12,12 +12,13 @@ var notificationRouter = require('./routes/notification');
 
 var app = express();
 
-app.disable('x-powered-by');
+app.disable('x-powered-by'); // disable default header
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
-hbs.registerPartials(__dirname + '/views/partials');
+app.set('view engine', 'hbs'); // set handlebars as the render view engine
+hbs.registerPartials(__dirname + '/views/partials'); // register partials like menu, error...
+
 
 app.use(logger('dev'));
 
