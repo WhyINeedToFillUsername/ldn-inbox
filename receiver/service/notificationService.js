@@ -26,8 +26,8 @@ const notificationService = {
 function getNotificationsUrls() {
     let notifs = db.getAllNotifications();
     let notificationsUrls = [];
-    for (let notif of notifs) {
-        notificationsUrls.push({"@id": ENDPOINT_FULL_URL + notif.id});
+    for (let notification of notifs) {
+        notificationsUrls.push({"@id": ENDPOINT_FULL_URL + notification.id});
     }
     return notificationsUrls;
 }

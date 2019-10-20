@@ -29,7 +29,7 @@ function callback(req, res) {
     return function processDiscoveredTarget(discoveredUrl) {
         if (discoveredUrl) {
 
-            let usedInboxUrls = [];
+            let usedInboxUrls = [discoveredUrl];
             if (req.session.usedInboxUrls) usedInboxUrls = usedInboxUrls.concat(req.session.usedInboxUrls);
 
             req.session.usedInboxUrls = usedInboxUrls;

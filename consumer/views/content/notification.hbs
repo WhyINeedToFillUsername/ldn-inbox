@@ -5,26 +5,10 @@
 </header>
 
 <div class="row">
-    <!-- TODO create a module of the menu -->
-    <nav class="col-2">
-        <ul class="nav flex-column nav-pills">
-            <li class="nav-item"><a class="nav-link active" href="#">Inbox</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Outbox</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Archived</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Bin</a></li>
-        </ul>
-    </nav>
+    {{> menu }}
 
     <main class="col">
-        {{#if error}}
-            <!-- TODO create a module of the error -->
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                {{error}}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {{/if}}
+        {{> errorAlert }}
 
         <div class="card">
             <div class="card-header actions">
