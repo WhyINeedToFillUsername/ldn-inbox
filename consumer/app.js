@@ -9,6 +9,7 @@ const session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var notificationRouter = require('./routes/notification');
+var testSolidAuthRouter = require('./routes/testSolidAuth');
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use(session({secret: 'TODOchange', saveUninitialized: false, resave: false})
 
 app.use('/', indexRouter);
 app.use('/', notificationRouter);
+app.use('/testSolidAuth', testSolidAuthRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
