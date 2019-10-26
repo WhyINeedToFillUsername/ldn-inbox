@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Solid Auth</title>
+    <link rel='stylesheet' href='./stylesheets/style.css'/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!-- scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <script src="https://solid.github.io/solid-auth-client/dist/solid-auth-client.bundle.js"></script>
+    <script src="scripts/rdflib.min.js"></script>
+</head>
+<body>
+
+<div class="container-fluid">
+    <header class="row">
+        <div class="col">
+            <h1>Test Solid Auth</h1>
+        </div>
+    </header>
+
+    <div class="row">
+        <main class="col" id="main">
+            <div class="card">
+                <div class="card-header actions">
+                    <a href="/" title="Back to inbox"><i class="fas fa-arrow-left"></i> back</a>
+                    <a href="" id="logout" class="float-right">Log out</a>
+                </div>
+                <div class="card-body">
+                    webId: '<span id="webId"></span>'
+                    <br>loaded data:<hr/>
+                    <pre id="data"></pre>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const FOAF = $rdf.Namespace('http://xmlns.com/foaf/0.1/');
+        const LDP = $rdf.Namespace("http://www.w3.org/ns/ldp#");
+
+        addAlert = function (level, message) {
+            $("#main").prepend('<div class="alert alert-' + level + ' alert-dismissible fade show" role="alert">\n' +
+                '            ' + message +
+                '            <button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
+                '                <span aria-hidden="true">&times;</span>\n' +
+                '            </button>\n' +
+                '        </div>');
+        };
+
+        function afterLogin(session) {
+            // alert(`Logged in as ${session.webId}`);
+            addAlert('success', 'Successfully logged in as ' + session.webId);
+            $('#webId').html(session.webId);
+            loadProfile(session.webId);
+        }
+
+        // register logout
+        function logout() {
+            return solid.auth.logout()
+                .then(addAlert('info', 'You have logged out.'));
+        }
+
+        $('#logout').click(() => logout());
+
+        async function popupLogin() {
+            let session = await solid.auth.currentSession();
+            let popupUri = './solid-auth-popup.html';
+            if (!session) {
+                session = await solid.auth.popupLogin({popupUri});
+            }
+            afterLogin(session);
+        }
+
+        async function loadProfile(webId) {
+            // Set up a local data store and associated data fetcher
+            const store = $rdf.graph();
+            const fetcher = new $rdf.Fetcher(store);
+
+            // Load the person's data into the store
+            await fetcher.load(webId);
+
+            // Display their details
+            const fullName = store.any($rdf.sym(webId), FOAF('name'));
+            let data = fullName && 'name: ' + fullName.value;
+            data += '\n';
+
+            const inbox = store.any($rdf.sym(webId), LDP('inbox'));
+            data += inbox && inbox.value;
+
+            $('#data').text(data);
+        }
+
+        popupLogin();
+    </script>
+
+</div>
+
+</body>
+</html>
