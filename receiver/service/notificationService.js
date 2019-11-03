@@ -9,7 +9,7 @@ const notificationService = {
         return db.addNewNotification(notification);
     },
 
-    createAllNotificationsResponse: function (req) {
+    createAllNotificationsResponse: function () {
         return {
             "@context": "http://www.w3.org/ns/ldp#",
             "@id": ENDPOINT_FULL_URL,
