@@ -12,7 +12,7 @@ var app = express();
 app.disable('x-powered-by');
 
 app.use(logger('dev'));
-app.use(express.json({ type: config.ACCEPTED_CONTENT_TYPES }));
+app.use(express.json({ type: config.ACCEPTED_CONTENT_TYPES })); // use built-in middleware to parse JSON requests (only the supplied types)
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));

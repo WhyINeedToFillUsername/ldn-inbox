@@ -1,9 +1,11 @@
 // common config
 let config = {
     ACCEPTED_CONTENT_TYPES: [
-        "application/json",
-        "application/ld+json",
-        "application/activity+json"
+        'application/json',
+        'application/ld+json',
+        'application/ld+json; profile="https://www.w3.org/ns/activitystreams"', // TODO use parser not to list all (http)
+        'application/ld+json;profile="https://www.w3.org/ns/activitystreams"',
+        'application/activity+json'
     ],
 
     CONTENT_TYPE: 'application/ld+json',
