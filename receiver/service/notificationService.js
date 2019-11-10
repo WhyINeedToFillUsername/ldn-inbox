@@ -6,6 +6,8 @@ const ENDPOINT_FULL_URL = config.BASE_URL + config.ENDPOINT_URL + config.NOTIFIC
 const notificationService = {
 
     processMessage: function (notification) {
+        // TODO apply constrains and checks on the message (e.g. valid json, has @context ActivityStreams etc.)
+        // if @context not present, assume '"@context": "https://www.w3.org/ns/activitystreams",'
         return db.addNewNotification(notification);
     },
 
