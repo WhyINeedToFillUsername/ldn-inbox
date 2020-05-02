@@ -6,6 +6,7 @@ var logger = require('morgan');
 const config = require('./config');
 const auth = require('./auth');
 var apiRouter = require('./routes/api');
+const cors = require('cors');
 
 var app = express();
 
@@ -16,6 +17,13 @@ app.use(express.json({ type: config.ACCEPTED_CONTENT_TYPES })); // use built-in 
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// CORS
+var corsOptions = {
+  origin: true, // reflect the request origin
+  credentials: true // require credentials
+};
+app.use(cors(corsOptions));
 
 app.use(auth.authorize);
 app.use(config.ENDPOINT_URL, apiRouter);

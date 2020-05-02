@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const config = require('../config');
 const notificationService = require('../service/notificationService');
+const cors = require('cors');
 
 router.post(config.NOTIFICATION_URL, function (req, res, next) {
     const notification = req.body;
@@ -29,7 +30,8 @@ router.get(config.NOTIFICATION_URL + '/:notificationId', function (req, res, nex
     }
 });
 
-router.options(config.NOTIFICATION_URL, function (req, res, next) {
+var corsOptions = {origin: true}; // reflect the request origin
+router.options(config.NOTIFICATION_URL, cors(corsOptions), function (req, res, next) {
     res
         .set({
             'Allow': 'GET, OPTIONS, POST',

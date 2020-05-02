@@ -91,8 +91,8 @@ async function loadNotification(notificationUri) {
 }
 
 async function loadNotifs() {
-    const uri = "https://nokton.solid.community/inbox/";
-    // const uri = "http://localhost:5001/API/notifications/";
+    // const uri = "https://nokton.solid.community/inbox/";
+    const uri = "http://localhost:5001/API/notifications/";
 
     // Set up a local data store and associated data fetcher
     const store = $rdf.graph();
