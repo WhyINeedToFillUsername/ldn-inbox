@@ -1,0 +1,15 @@
+{
+  "name": "web-consumer-sender",
+  "version": "1.0.0",
+  "description": "client page to load data using rdflib",
+  "main": "scripts/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "rdflib": "^1.2.1",
+    "solid-auth-client": "^2.4.1"
+  }
+}

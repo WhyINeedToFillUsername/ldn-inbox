@@ -78,4 +78,5 @@ typings/
 
 # do not share the secret key!
 /API_KEY.js
-/.idea/sonarlint/
+/.idea/
+!/.idea/runConfigurations

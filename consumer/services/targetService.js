@@ -43,7 +43,8 @@ const targetService = {
             if (inboxUrl) {
                 callback(inboxUrl);
 
-            } else { // 2) e) GET on the target URL to retrieve an RDF representation
+            // 2) e) GET on the target URL to retrieve an RDF representation
+            } else {
                 getInboxUrlFromRDF(urlToExplore, callback);
             }
         });
