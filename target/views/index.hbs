@@ -1,2 +1,25 @@
 <h1>{{title}}</h1>
-<p>Welcome to {{title}} page.</p>
+<p>Welcome to {{title}}. This app is for testing LDN inbox discovery.</p>
+
+<h2>Discovery options</h2>
+<p>(from <a href="https://www.w3.org/TR/ldn/#discovery">https://www.w3.org/TR/ldn/#discovery</a>):</p>
+
+<ol>
+    <li>LINK - <span class="text">try HTTP GET or HEAD on this page and check the headers</span>
+        <ol>
+            <li>head &gt; Link: &lt;http://example.org/inbox/&gt;; rel="http://www.w3.org/ns/ldp#inbox"</li>
+            <li>get &gt; Link: &lt;http://example.org/inbox/&gt;; rel="http://www.w3.org/ns/ldp#inbox"</li>
+        </ol>
+    </li>
+
+    <li>RDF - <span class="text">try HTTP GET on <a href="/content">/content</a> with Accept header and use one of the following
+        content-types:</span>
+        <ol>
+            <li>JSON-LD with relation of type http://www.w3.org/ns/ldp#inbox</li>
+            <li>HTML &lt;a&gt; with rel="http://www.w3.org/ns/ldp#inbox"</li>
+            <li>HTML &lt;link&gt; with rel="http://www.w3.org/ns/ldp#inbox"</li>
+            <li>HTML &lt;section&gt; with property="http://www.w3.org/ns/ldp#inbox"</li>
+            <li>text/turtle with &lt;http://www.w3.org/ns/ldp#inbox&gt; relation</li>
+        </ol>
+    </li>
+</ol>

@@ -1,0 +1,30 @@
+<h2>2) HTML content options:</h2>
+<h3>b) HTML &lt;a &gt; with rel="http://www.w3.org/ns/ldp#inbox"</h3>
+<p about="http://example.org/event" typeof="http://schema.org/Event" lang="en">
+    <a rel="http://www.w3.org/ns/ldp#inbox" href="#">RSVP</a> to event
+</p>
+<pre>
+&lt;p about="http://example.org/event" typeof="http://schema.org/Event" lang="en"&gt;
+    &lt;a rel="http://www.w3.org/ns/ldp#inbox" href="#" &gt;RSVP&lt;/a &gt; to event
+&lt;/p&gt;</pre>
+
+
+<h3>c) HTML
+    <link>
+    with rel="http://www.w3.org/ns/ldp#inbox"
+</h3>
+<link href="https://tonda.solid.community/inbox/" rel="http://www.w3.org/ns/ldp#inbox"/>
+<p>(invisible HTML)</p>
+<pre>&lt;link href="https://tonda.solid.community/inbox/" rel="http://www.w3.org/ns/ldp#inbox" /&gt; </pre>
+
+
+<h3>d) HTML &lt;section&gt; with property="http://www.w3.org/ns/ldp#inbox"</h3>
+<section id="results" about="#results"
+         property="http://www.w3.org/ns/ldp#inbox" resource="https://tonda.solid.community/inbox/">
+</section>
+
+<p>(invisible HTML)</p>
+<pre>
+&lt;section id="results" about="#results"
+  property="http://www.w3.org/ns/ldp#inbox" resource="https://tonda.solid.community/inbox/" &gt;
+&lt;/section&gt;</pre>

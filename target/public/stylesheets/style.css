@@ -6,3 +6,21 @@ body {
 a {
   color: #00B7FF;
 }
+
+ol > li {
+  font-family: "Consolas", serif;
+  margin: 0 0 10px 0;
+}
+
+ol li ol li {
+  margin: 2px;
+}
+
+.text {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+pre {
+  padding: 10px;
+  border: #d3d3d3 solid 1px;
+}
